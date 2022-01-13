@@ -1,5 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  margin: 0 auto;
+  width: 75%;
+  font-family: 'Share Tech Mono', monospace;
+  background-color: salmon;
+}
+
+.calculator {
+  margin: 4em auto 0;
+  padding: 2em 2em 7em;
+  width: 350px;
+  height: 52vh;
+  max-width: 500px;
+  background-color: rgb(39, 37, 37);
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  border-radius: 10px;
+  box-shadow: 2px -2px 20px 1px rgba(0, 0, 0, 0.5);
+}
+
 .numbers {
-  max-width: 150px;
+  /* max-width: 300px; */
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -7,7 +35,45 @@
 }
 
 .btn {
-  max-width: 40px;
-  width: 40px;
+  color: white;
+  background: rgb(71, 69, 69);
+  max-width: 50px;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  border-radius: 5px;
+  border-color: black;
+}
+
+#display {
+  background-color: aquamarine;
   height: 40px;
+  width: 100%;
+  margin-bottom: 2em;
+  padding-top: 1em;
+  /* padding-right: 1em; */
+  text-align: center;
+  font-size: 1.2rem;
+  transform: translateY(-15px);
+}
+
+.device {
+  color: white;
+  text-align: right;
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.operators {
+  display: flex;
+  flex-direction: column;
+}
+.interface-btn {
+  display: flex;
+  flex-direction: row;
+}
+
+#equals {
+  background-color: rgb(18, 157, 69);
+  min-width: 170px;
 }
