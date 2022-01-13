@@ -1,0 +1,13 @@
+.numbers {
+  max-width: 150px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  max-width: 40px;
+  width: 40px;
+  height: 40px;
+}
