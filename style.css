@@ -16,6 +16,7 @@ body {
   padding: 2em 2em 7em;
   width: 350px;
   height: 52vh;
+  min-height: 500px;
   max-width: 500px;
   background-color: rgb(39, 37, 37);
   display: flex;
@@ -48,13 +49,17 @@ body {
 #display {
   background-color: aquamarine;
   height: 40px;
+  min-height: 40px;
   width: 100%;
   margin-bottom: 2em;
   padding-top: 1em;
   /* padding-right: 1em; */
+}
+
+#display p {
   text-align: center;
   font-size: 1.2rem;
-  transform: translateY(-15px);
+  transform: translateY(-35%);
 }
 
 .device {
