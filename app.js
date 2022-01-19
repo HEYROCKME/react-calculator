@@ -47,7 +47,6 @@ function Calculator() {
   function handleChange(e) {
     e.preventDefault()
     console.log((value += e.target.value))
-    // setCount(e.target.value)
   }
 
   function handleClick(val) {
@@ -60,14 +59,6 @@ function Calculator() {
       setSecNum(secNum + currentElem)
       setDisplay(secNum + currentElem)
     }
-
-    // console.log(currentElem)
-    // if (currentElem === '.' && count[count.length - 1] === '.') {
-    //   return ''
-    // }
-    // if (currentElem == 0 && count[0] == 0) {
-    //   return ''
-    // } else setCount(count + val.target.value)
   }
 
   function handleOpClick(op) {
@@ -88,32 +79,16 @@ function Calculator() {
   }
 
   function clear() {
-    // setCount('')
     setDisplay('')
     setFirstNum('')
     setSecNum('')
     setOpActive(false)
-    // try {
-    //   if (count == 'ERR') {
-    //     return setCount('')
-    //   } else return nsetCount(count.slice(0, -1))
-    // } catch (error) {
-    //   setCount('')
-    // }
   }
   function calculate() {
     let calc = eval(firstNum + secNum)
     console.log(calc)
     setSum(eval(calc))
     setDisplay(calc)
-
-    // try {
-    //   if (!count) {
-    //     return setCount(0)
-    //   } else setCount(eval(count))
-    // } catch (error) {
-    //   setCount('ERR')
-    // }
   }
 
   function update() {
