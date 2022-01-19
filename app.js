@@ -1,4 +1,4 @@
-const { useState } = React
+const { useState, useEffect } = React
 
 const numberStr = [
   'zero',
@@ -30,8 +30,20 @@ function Button(props) {
 }
 
 function Calculator() {
-  const [count, setCount] = useState('')
+  const [opActive, setOpActive] = useState(false)
+  const [count, setCount] = useState(0)
+  const [firstNum, setFirstNum] = useState('')
+  const [secNum, setSecNum] = useState('')
+  const [sum, setSum] = useState('')
+  const [display, setDisplay] = useState('')
 
+  /**
+   *
+   * get first number =>
+   *   conditions no double decimals, no zero zero at [0] unless decimal at [1].
+   *
+   *
+   */
   function handleChange(e) {
     e.preventDefault()
     console.log((value += e.target.value))
@@ -40,41 +52,72 @@ function Calculator() {
 
   function handleClick(val) {
     let currentElem = val.target.value
-    // console.log(currentElem)
-    if (currentElem === '.' && count[count.length - 1] === '.') {
-      return ''
+    if (!opActive) {
+      setFirstNum(firstNum + currentElem)
+      setDisplay(display + currentElem)
+      setCount(count + 1)
+    } else if (opActive) {
+      setSecNum(secNum + currentElem)
+      setDisplay(secNum + currentElem)
     }
-    if (currentElem == 0 && count[0] == 0) {
-      return ''
-    } else setCount(count + val.target.value)
+
+    // console.log(currentElem)
+    // if (currentElem === '.' && count[count.length - 1] === '.') {
+    //   return ''
+    // }
+    // if (currentElem == 0 && count[0] == 0) {
+    //   return ''
+    // } else setCount(count + val.target.value)
+  }
+
+  function handleOpClick(op) {
+    let operator = op.target.value
+    setFirstNum(firstNum + operator)
+    setOpActive(true)
+
+    setDisplay('')
+    console.log('calculate', firstNum + operator)
   }
 
   function Display(props) {
     return (
       <div id="display">
-        <p>{count}</p>
+        <p>{display}</p>
       </div>
     )
   }
 
   function clear() {
-    console.log(count)
-    try {
-      if (count == 'ERR') {
-        return setCount('')
-      } else return nsetCount(count.slice(0, -1))
-    } catch (error) {
-      setCount('')
-    }
+    // setCount('')
+    setDisplay('')
+    setFirstNum('')
+    setSecNum('')
+    setOpActive(false)
+    // try {
+    //   if (count == 'ERR') {
+    //     return setCount('')
+    //   } else return nsetCount(count.slice(0, -1))
+    // } catch (error) {
+    //   setCount('')
+    // }
   }
   function calculate() {
-    try {
-      if (!count) {
-        return setCount('')
-      } else setCount(eval(count))
-    } catch (error) {
-      setCount('ERR')
-    }
+    let calc = eval(firstNum + secNum)
+    console.log(calc)
+    setSum(eval(calc))
+    setDisplay(calc)
+
+    // try {
+    //   if (!count) {
+    //     return setCount(0)
+    //   } else setCount(eval(count))
+    // } catch (error) {
+    //   setCount('ERR')
+    // }
+  }
+
+  function update() {
+    setDisplay(sum)
   }
 
   return (
@@ -140,7 +183,7 @@ function Calculator() {
                 key={item}
                 id={operatorNames[i]}
                 value={item}
-                onClick={(e) => handleClick(e)}
+                onClick={(e) => handleOpClick(e)}
               />
             )
           })}
