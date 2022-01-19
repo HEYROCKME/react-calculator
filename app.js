@@ -1,4 +1,4 @@
-const { useState } = React
+const { useState, useEffect } = React
 
 const numberStr = [
   'zero',
@@ -30,6 +30,7 @@ function Button(props) {
 }
 
 function Calculator() {
+  const [opActive, setOpActive] = useState(false)
   const [count, setCount] = useState(0)
   const [firstNum, setFirstNum] = useState('')
   const [secNum, setSecNum] = useState('')
@@ -51,9 +52,13 @@ function Calculator() {
 
   function handleClick(val) {
     let currentElem = val.target.value
-    if (count == 0) {
-      setFirstNum(currentElem)
+    if (!opActive) {
+      setFirstNum(firstNum + currentElem)
       setDisplay(display + currentElem)
+      setCount(count + 1)
+    } else if (opActive) {
+      setSecNum(secNum + currentElem)
+      setDisplay(secNum + currentElem)
     }
 
     // console.log(currentElem)
@@ -67,7 +72,11 @@ function Calculator() {
 
   function handleOpClick(op) {
     let operator = op.target.value
-    console.log(operator, firstNum)
+    setFirstNum(firstNum + operator)
+    setOpActive(true)
+
+    setDisplay('')
+    console.log('calculate', firstNum + operator)
   }
 
   function Display(props) {
@@ -80,9 +89,10 @@ function Calculator() {
 
   function clear() {
     // setCount('')
-    setTotal('')
+    setDisplay('')
     setFirstNum('')
     setSecNum('')
+    setOpActive(false)
     // try {
     //   if (count == 'ERR') {
     //     return setCount('')
@@ -92,6 +102,11 @@ function Calculator() {
     // }
   }
   function calculate() {
+    let calc = eval(firstNum + secNum)
+    console.log(calc)
+    setSum(eval(calc))
+    setDisplay(calc)
+
     // try {
     //   if (!count) {
     //     return setCount(0)
@@ -99,6 +114,10 @@ function Calculator() {
     // } catch (error) {
     //   setCount('ERR')
     // }
+  }
+
+  function update() {
+    setDisplay(sum)
   }
 
   return (
