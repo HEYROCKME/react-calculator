@@ -30,8 +30,19 @@ function Button(props) {
 }
 
 function Calculator() {
-  const [count, setCount] = useState('')
+  const [count, setCount] = useState(0)
+  const [firstNum, setFirstNum] = useState('')
+  const [secNum, setSecNum] = useState('')
+  const [sum, setSum] = useState('')
+  const [display, setDisplay] = useState('')
 
+  /**
+   *
+   * get first number =>
+   *   conditions no double decimals, no zero zero at [0] unless decimal at [1].
+   *
+   *
+   */
   function handleChange(e) {
     e.preventDefault()
     console.log((value += e.target.value))
@@ -40,41 +51,54 @@ function Calculator() {
 
   function handleClick(val) {
     let currentElem = val.target.value
-    // console.log(currentElem)
-    if (currentElem === '.' && count[count.length - 1] === '.') {
-      return ''
+    if (count == 0) {
+      setFirstNum(currentElem)
+      setDisplay(display + currentElem)
     }
-    if (currentElem == 0 && count[0] == 0) {
-      return ''
-    } else setCount(count + val.target.value)
+
+    // console.log(currentElem)
+    // if (currentElem === '.' && count[count.length - 1] === '.') {
+    //   return ''
+    // }
+    // if (currentElem == 0 && count[0] == 0) {
+    //   return ''
+    // } else setCount(count + val.target.value)
+  }
+
+  function handleOpClick(op) {
+    let operator = op.target.value
+    console.log(operator, firstNum)
   }
 
   function Display(props) {
     return (
       <div id="display">
-        <p>{count}</p>
+        <p>{display}</p>
       </div>
     )
   }
 
   function clear() {
-    console.log(count)
-    try {
-      if (count == 'ERR') {
-        return setCount('')
-      } else return nsetCount(count.slice(0, -1))
-    } catch (error) {
-      setCount('')
-    }
+    // setCount('')
+    setTotal('')
+    setFirstNum('')
+    setSecNum('')
+    // try {
+    //   if (count == 'ERR') {
+    //     return setCount('')
+    //   } else return nsetCount(count.slice(0, -1))
+    // } catch (error) {
+    //   setCount('')
+    // }
   }
   function calculate() {
-    try {
-      if (!count) {
-        return setCount('')
-      } else setCount(eval(count))
-    } catch (error) {
-      setCount('ERR')
-    }
+    // try {
+    //   if (!count) {
+    //     return setCount(0)
+    //   } else setCount(eval(count))
+    // } catch (error) {
+    //   setCount('ERR')
+    // }
   }
 
   return (
@@ -140,7 +164,7 @@ function Calculator() {
                 key={item}
                 id={operatorNames[i]}
                 value={item}
-                onClick={(e) => handleClick(e)}
+                onClick={(e) => handleOpClick(e)}
               />
             )
           })}
