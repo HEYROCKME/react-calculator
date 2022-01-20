@@ -31,7 +31,6 @@ function Button(props) {
 
 function Calculator() {
   const [opActive, setOpActive] = useState(false)
-  const [count, setCount] = useState(0)
   const [firstNum, setFirstNum] = useState('')
   const [secNum, setSecNum] = useState('')
   const [sum, setSum] = useState('')
@@ -54,7 +53,6 @@ function Calculator() {
     if (!opActive) {
       setFirstNum(firstNum + currentElem)
       setDisplay(display + currentElem)
-      setCount(count + 1)
     } else if (opActive) {
       setSecNum(secNum + currentElem)
       setDisplay(secNum + currentElem)
@@ -63,6 +61,12 @@ function Calculator() {
 
   function handleOpClick(op) {
     let operator = op.target.value
+
+    if (!firstNum || opActive) {
+      setOpActive(false)
+      return ''
+    }
+
     setFirstNum(firstNum + operator)
     setOpActive(true)
 
@@ -85,10 +89,16 @@ function Calculator() {
     setOpActive(false)
   }
   function calculate() {
+    if (!secNum) {
+      setSecNum('0')
+    }
     let calc = eval(firstNum + secNum)
     console.log(calc)
     setSum(eval(calc))
     setDisplay(calc)
+    setFirstNum(calc)
+    setSecNum('')
+    setOpActive(false)
   }
 
   function update() {
