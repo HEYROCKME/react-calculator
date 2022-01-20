@@ -1,8 +1,8 @@
 # React Calculator
 
-making a simple functioning calculator with react
+making a simple functioning calculator with react.
 
-# User Stories from freeCodeCamp.org
+User Stories from freeCodeCamp.org:
 
 User Story #1: My calculator should contain a clickable element containing an = (equal sign) with a corresponding id="equals".
 

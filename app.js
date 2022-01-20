@@ -50,18 +50,6 @@ function Calculator() {
     uiDisplay = `${display}`
   }, [display])
 
-  /**
-   *
-   * get first number =>
-   *   conditions no double decimals, no zero zero at [0] unless decimal at [1].
-   *
-   *
-   */
-  // function handleChange(e) {
-  //   e.preventDefault()
-  //   console.log((value += e.target.value))
-  // }
-
   function handleClick(val) {
     let currentElem = val.target.value
 
