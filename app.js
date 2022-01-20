@@ -34,7 +34,21 @@ function Calculator() {
   const [firstNum, setFirstNum] = useState('')
   const [secNum, setSecNum] = useState('')
   const [sum, setSum] = useState('')
-  const [display, setDisplay] = useState('')
+  const [display, setDisplay] = useState(0)
+
+  function Display(props) {
+    return (
+      <div id="display">
+        <p>{display}</p>
+      </div>
+    )
+  }
+
+  let uiDisplay = document.getElementById('display')
+
+  useEffect(() => {
+    uiDisplay = `${display}`
+  }, [display])
 
   /**
    *
@@ -43,13 +57,19 @@ function Calculator() {
    *
    *
    */
-  function handleChange(e) {
-    e.preventDefault()
-    console.log((value += e.target.value))
-  }
+  // function handleChange(e) {
+  //   e.preventDefault()
+  //   console.log((value += e.target.value))
+  // }
 
   function handleClick(val) {
     let currentElem = val.target.value
+
+    if (display === 0) {
+      setFirstNum(currentElem)
+      return setDisplay(currentElem)
+    }
+
     if (!opActive) {
       setFirstNum(firstNum + currentElem)
       setDisplay(display + currentElem)
@@ -74,16 +94,8 @@ function Calculator() {
     console.log('calculate', firstNum + operator)
   }
 
-  function Display(props) {
-    return (
-      <div id="display">
-        <p>{display}</p>
-      </div>
-    )
-  }
-
   function clear() {
-    setDisplay('')
+    setDisplay(0)
     setFirstNum('')
     setSecNum('')
     setOpActive(false)
