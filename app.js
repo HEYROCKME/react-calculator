@@ -68,9 +68,7 @@ function Calculator() {
 
     if (currentElem === '.') {
       currentElem = handleDots(currentElem)
-    }
 
-    if (display === 0) {
       setFirstNum(currentElem)
       return setDisplay(currentElem)
     }
