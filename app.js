@@ -13,6 +13,8 @@ const numberStr = [
   'nine',
 ]
 
+const regex = [/([.]\B)|([.]{2,}])|[.+](\d+[.+])\b/g]
+
 const operators = ['+', '-', '*', '/']
 const operatorNames = ['add', 'subtract', 'multiply', 'divide']
 
@@ -31,7 +33,8 @@ function Button(props) {
 
 function Calculator() {
   const [opActive, setOpActive] = useState(false)
-  const [firstNum, setFirstNum] = useState('')
+  const [dot, setDot] = useState(false)
+  const [firstNum, setFirstNum] = useState(0)
   const [secNum, setSecNum] = useState('')
   const [sum, setSum] = useState('')
   const [display, setDisplay] = useState(0)
@@ -50,10 +53,22 @@ function Calculator() {
     uiDisplay = `${display}`
   }, [display])
 
+  function handleDots(input) {
+    if (input && !dot) {
+      console.log('newDot')
+      setDot(true)
+      return input
+    } else {
+      return ''
+    }
+  }
+
   function handleClick(val) {
     let currentElem = val.target.value
 
-    if (display === 0) {
+    if (currentElem === '.') {
+      currentElem = handleDots(currentElem)
+
       setFirstNum(currentElem)
       return setDisplay(currentElem)
     }
@@ -70,16 +85,16 @@ function Calculator() {
   function handleOpClick(op) {
     let operator = op.target.value
 
-    if (!firstNum || opActive) {
+    if (firstNum || opActive) {
       setOpActive(false)
-      return ''
+      setFirstNum(firstNum + operator)
+    } else {
+      setFirstNum(firstNum + operator)
+      setOpActive(true)
     }
 
-    setFirstNum(firstNum + operator)
-    setOpActive(true)
-
     setDisplay('')
-    console.log('calculate', firstNum + operator)
+    setDot(false)
   }
 
   function clear() {
@@ -92,10 +107,11 @@ function Calculator() {
     if (!secNum) {
       setSecNum('0')
     }
-    let calc = eval(firstNum + secNum)
-    console.log(calc)
+    let calc = firstNum + secNum
+    calc.replace()
+    console.log('calced ' + calc)
     setSum(eval(calc))
-    setDisplay(calc)
+    setDisplay(eval(calc))
     setFirstNum(calc)
     setSecNum('')
     setOpActive(false)
